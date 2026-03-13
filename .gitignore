@@ -1,0 +1,12 @@
+.DS_Store
+*test*
+TODO
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "termilite"
+version = "0.1.0"
+authors = [
+  { name="Faris Muhammad" },
+]
+description = "A very lightweight TUI engine"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Software Development :: User Interfaces",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
