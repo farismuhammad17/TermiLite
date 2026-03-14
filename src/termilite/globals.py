@@ -18,7 +18,7 @@ COLOR_BG_RED = "\x1b[41m"
 COLOR_BG_BLUE = "\x1b[44m"
 COLOR_BG_WHITE = "\x1b[47m"
 
-CORNER_TOP_LEFT     = "┌" # Unicode U+250C
+CORNER_TOP_LEFT     = "+"
 CORNER_TOP_RIGHT    = "┐" # Unicode U+2510
 CORNER_BOTTOM_LEFT  = "└" # Unicode U+2514
 CORNER_BOTTOM_RIGHT = "┘" # Unicode U+2518
@@ -45,5 +45,8 @@ is_dragging = False
 drag_target = None
 drag_offset_x = 0
 drag_offset_y = 0
+
+resize_target = None
+resize_offset = 0
 
 kbd_buffer = deque() # Keyboard buffer

@@ -13,6 +13,11 @@ class Window:
 
         self.draggable = True
 
+        self.resizable_top    = True
+        self.resizable_bottom = True
+        self.resizable_left   = True
+        self.resizable_right  = True
+
         self.border_top      = termilite.globals.HLINE
         self.border_bottom   = termilite.globals.HLINE
         self.border_left     = termilite.globals.VLINE

@@ -20,13 +20,21 @@ def render():
             for y_ in range(win.y, win.y + win.height):
                 set_cell(x_, y_, ' ')
 
-        border_up_half_str = (win.border_top if not win == termilite.globals.active_window else win.focussed_top) * ((win.width - len(win.name)) // 2)
-
-        border_up = border_up_half_str + win.name + border_up_half_str
+        border_up_char = win.border_top if not win == termilite.globals.active_window else win.focussed_top
         border_down_char = win.border_bottom if not win == termilite.globals.active_window else win.focussed_bottom
 
+        name       = win.name[:win.width - 2]
+        name_len   = len(name)
+        name_start = (win.width - name_len) // 2
+
         for i in range(win.x, win.x + win.width): # Top and Bottom
-            set_cell(i, win.y - 1, border_up[i - win.x])
+            local_idx = i - win.x
+
+            if name_len < win.width and name_start <= local_idx < name_start + name_len:
+                set_cell(i, win.y - 1, name[local_idx - name_start])
+            else:
+                set_cell(i, win.y - 1, border_up_char)
+
             set_cell(i, win.y + win.height, border_down_char)
         for i in range(win.y, win.y + win.height): # Left and Right
             set_cell(win.x - 1, i, win.border_left)

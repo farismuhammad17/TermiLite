@@ -7,6 +7,11 @@ win = termilite.Window(x=5, y=5, width=WIDTH, height=HEIGHT, z=0)
 
 win.name = " Calculator "
 
+win.resizable_top    = False
+win.resizable_bottom = False
+win.resizable_left   = False
+win.resizable_right  = False
+
 inp     = termilite.Label(win, 2, 1, "")
 hr      = termilite.Label(win, 0, 3, "-" * WIDTH)
 
