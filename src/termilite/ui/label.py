@@ -7,8 +7,9 @@ class Label:
         self.y = y
         self.text = text
 
-        self.width = width or window.width
-        self.height = height or window.height
+        # Self adjust to take only necessary space
+        self.width  = width or max(window.width, len(text))
+        self.height = height or -(-len(text) // window.width) # Ceil division
 
         window.components.append(self)
 

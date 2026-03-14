@@ -19,17 +19,23 @@ def render():
         for x_ in range(win.x, win.x + win.width): # To overlap, just clear off everything below us
             for y_ in range(win.y, win.y + win.height):
                 set_cell(x_, y_, ' ')
-        for i in range(win.x, win.x + win.width): # Borders
-            set_cell(i, win.y - 1, termilite.globals.HLINE if not win == termilite.globals.active_window else '=') # Top
-            set_cell(i, win.y + win.height, termilite.globals.HLINE if not win == termilite.globals.active_window else '=') # Bottom
-        for i in range(win.y, win.y + win.height):
-            set_cell(win.x - 1, i, termilite.globals.VLINE) # Left
-            set_cell(win.x + win.width, i, termilite.globals.VLINE) # Right
 
-        set_cell(win.x - 1, win.y - 1, termilite.globals.CORNER_TOP_LEFT)
-        set_cell(win.x + win.width, win.y - 1, termilite.globals.CORNER_TOP_RIGHT)
-        set_cell(win.x - 1, win.y + win.height, termilite.globals.CORNER_BOTTOM_LEFT)
-        set_cell(win.x + win.width, win.y + win.height, termilite.globals.CORNER_BOTTOM_RIGHT)
+        border_up_half_str = (win.border_top if not win == termilite.globals.active_window else win.focussed_top) * ((win.width - len(win.name)) // 2)
+
+        border_up = border_up_half_str + win.name + border_up_half_str
+        border_down_char = win.border_bottom if not win == termilite.globals.active_window else win.focussed_bottom
+
+        for i in range(win.x, win.x + win.width): # Top and Bottom
+            set_cell(i, win.y - 1, border_up[i - win.x])
+            set_cell(i, win.y + win.height, border_down_char)
+        for i in range(win.y, win.y + win.height): # Left and Right
+            set_cell(win.x - 1, i, win.border_left)
+            set_cell(win.x + win.width, i, win.border_right)
+
+        set_cell(win.x - 1, win.y - 1, win.top_left_corner)
+        set_cell(win.x + win.width, win.y - 1, win.top_right_corner)
+        set_cell(win.x - 1, win.y + win.height, win.bottom_left_corner)
+        set_cell(win.x + win.width, win.y + win.height, win.bottom_right_corner)
 
         win.render()
 
@@ -54,7 +60,7 @@ def render():
         output.append(row_str + termilite.globals.COLOR_RESET + line_end)
 
     # Make sure buffer won't suddently load in next time we focus on something
-    # termilite.globals.kbd_buffer.clear()
+    termilite.globals.kbd_buffer.clear()
 
     # Move cursor to 0,0 and write the whole frame at once
     sys.stdout.write("".join(output))

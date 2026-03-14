@@ -1,16 +1,29 @@
 import termilite
 
 class Window:
-    def __init__(self, x: int, y: int, z: int, width: int, height: int):
+    def __init__(self, x: int, y: int, z: int, width: int, height: int, name: str = ""):
         self.x = x
         self.y = y
         self.z = z
         self.width  = width
         self.height = height
+        self.name = name
 
         self.components = []
 
         self.draggable = True
+
+        self.border_top      = termilite.globals.HLINE
+        self.border_bottom   = termilite.globals.HLINE
+        self.border_left     = termilite.globals.VLINE
+        self.border_right    = termilite.globals.VLINE
+        self.focussed_top    = '='
+        self.focussed_bottom = '='
+
+        self.top_left_corner     = termilite.globals.CORNER_TOP_LEFT
+        self.top_right_corner    = termilite.globals.CORNER_TOP_RIGHT
+        self.bottom_left_corner  = termilite.globals.CORNER_BOTTOM_LEFT
+        self.bottom_right_corner = termilite.globals.CORNER_BOTTOM_RIGHT
 
         termilite.globals.windows.append(self)
         termilite.globals.total_windows += 1
@@ -19,7 +32,7 @@ class Window:
         pos_x = x + self.x
         pos_y = y + self.y
 
-        if 0 <= pos_x < termilite.globals.screen_width and 0 <= pos_y < termilite.globals.screen_height:
+        if 0 <= x < self.width and 0 <= y < self.height:
             termilite.globals.screen[pos_y][pos_x] = char
             termilite.globals.color_buffer[pos_y][pos_x] = color
 
