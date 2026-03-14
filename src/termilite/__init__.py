@@ -11,7 +11,7 @@ from .ui.input  import InputBox
 from .ui.button import Button
 
 __author__      = "Faris Muhammad"
-__version__     = "0.1.0"
+__version__     = "0.1.1"
 __license__     = "MIT"
 __description__ = "A very lightweight TUI engine"
 
