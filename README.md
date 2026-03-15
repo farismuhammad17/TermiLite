@@ -1,4 +1,6 @@
-# TermiLite
+<p align="center">
+    <img src="readme-assets/banner.png" style="border-radius: 10px; width: 80%; height: 80%;">
+</p>
 
 A lightweight TUI engine designed in Python. Obviously, it isn't exactly done, but I plan to use it on various projects. So as time goes, future projects may require more stuff from this small library, and, overtime, the library will grow.
 
@@ -13,7 +15,12 @@ Window(
     z: int,
     width: int,
     height: int,
-    name: str
+    name: str,
+    color: str,
+    margin_top: int,
+    margin_bottom: int,
+    margin_left: int,
+    margin_right: int,
 )
 
 Window.is_draggable: bool = True
@@ -34,16 +41,28 @@ Window.top_left_corner: str     = termilite.globals.CORNER_TOP_LEFT
 Window.top_right_corner: str    = termilite.globals.CORNER_TOP_RIGHT
 Window.bottom_left_corner: str  = termilite.globals.CORNER_BOTTOM_LEFT
 Window.bottom_right_corner: str = termilite.globals.CORNER_BOTTOM_RIGHT
+
+Window.focussable: str = True
+```
+
+```py
+Panel( # Subclass of Window, works similarly
+    side: str,
+    size: int,
+    z: int,
+    resizable: bool = True,
+    name: str = ""
+)
 ```
 
 ```py
 Label(
     window: Window,
-    x: int,
-    y: int,
+    x: int, y: int,
     text: str,
     width: int = None, # Self adjusts to take requires space
-    height: int = None
+    height: int = None,
+    color: str # Use termilite.color
 )
 ```
 

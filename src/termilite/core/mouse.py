@@ -32,7 +32,7 @@ def handle_mouse(sequence: str):
             for r_x in range(win.x - 1, win.x + win.width + 1):
                 if 0 <= r_y < termilite.globals.screen_height and 0 <= r_x < termilite.globals.screen_width:
                     termilite.globals.screen[r_y][r_x] = ' '
-                    termilite.globals.color_buffer[r_y][r_x] = termilite.globals.COLOR_RESET
+                    termilite.globals.color_buffer[r_y][r_x] = termilite.color.RESET
 
         match termilite.globals.resize_mode:
             case 'T':
@@ -63,7 +63,7 @@ def handle_mouse(sequence: str):
             for x_ in range(win.x - 1, win.x + win.width + 1):
                 if 0 <= y_ < termilite.globals.screen_height and 0 <= x_ < termilite.globals.screen_width:
                     termilite.globals.screen[y_][x_] = ' '
-                    termilite.globals.color_buffer[y_][x_] = termilite.globals.COLOR_RESET
+                    termilite.globals.color_buffer[y_][x_] = termilite.color.RESET
 
         win.x = mx - termilite.globals.drag_offset_x
         win.y = my - termilite.globals.drag_offset_y

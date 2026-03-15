@@ -2,7 +2,6 @@ import termilite
 
 import sys
 import os
-import shutil
 import atexit
 
 if os.name == 'nt':
@@ -14,10 +13,6 @@ else:
     import tty
 
 def init():
-    size = shutil.get_terminal_size()
-    termilite.globals.screen_width = size.columns
-    termilite.globals.screen_height = size.lines
-
     if os.name == 'nt':
         kernel32 = ctypes.windll.kernel32
         handle = kernel32.GetStdHandle(-11)

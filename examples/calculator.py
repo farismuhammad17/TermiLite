@@ -32,4 +32,4 @@ btn_mul = termilite.Button(win, 15, 17, "*", 3, 3, onclick=lambda: inp.append_te
 btn_div = termilite.Button(win, 25, 17, "/", 3, 3, onclick=lambda: inp.append_text('/'))
 btn_bac = termilite.Button(win, 5, 20, "<", 3, 3, onclick=lambda: inp.set_text(inp.get_text()[:-1]))
 
-termilite.run(fps=60)
+termilite.run()
