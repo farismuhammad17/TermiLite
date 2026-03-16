@@ -71,8 +71,8 @@ def handle_mouse(sequence: str):
         return
 
     for win in sorted(termilite.globals.windows, key=lambda w: w.z, reverse=True):
-        if (win.x <= mx + 1 <= win.x + win.width and
-            win.y <= my + 1 <= win.y + win.height):
+        if (win.x - 1 <= mx <= win.x + win.width and
+            win.y - 1 <= my <= win.y + win.height):
 
             win.focus()
 
@@ -88,7 +88,7 @@ def handle_mouse(sequence: str):
                 termilite.globals.resize_target = win
                 termilite.globals.resize_offset = my - win.y
 
-            elif win.resizable_bottom and my == win.y + win.height - 1 and win.x <= mx <= win.x + win.width:
+            elif win.resizable_bottom and my == win.y + win.height and win.x <= mx <= win.x + win.width:
                 termilite.globals.resize_mode = 'B'
                 termilite.globals.resize_target = win
                 termilite.globals.resize_offset = my - win.y - win.height
@@ -98,7 +98,7 @@ def handle_mouse(sequence: str):
                 termilite.globals.resize_target = win
                 termilite.globals.resize_offset = mx - win.x
 
-            elif win.resizable_right and mx == win.x + win.width - 1 and win.y < my <= win.y + win.height:
+            elif win.resizable_right and mx == win.x + win.width and win.y < my <= win.y + win.height:
                 termilite.globals.resize_mode = 'R'
                 termilite.globals.resize_target = win
                 termilite.globals.resize_offset = mx - win.x - win.width
