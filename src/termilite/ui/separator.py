@@ -1,6 +1,17 @@
 import termilite
 
 class Separator:
+    """
+    Horizontal or Vertical separator
+
+    Attributes:
+        window (Window): Parent window
+        position (int): Position from the side given
+        horizontal (bool): If the separator is horizontal or not
+        color (str): Separator color
+        char (str): Character used
+    """
+
     def __init__(self, window: termilite.Window, position: int, horizontal: bool = True, color: str = termilite.color.RESET, char: str = None):
         self.window = window
         self._position = position

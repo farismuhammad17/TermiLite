@@ -7,6 +7,12 @@ class Page:
 
     Attributes:
         windows (list): List of all the windows in the page
+
+    Methods:
+        load: Load page into the screen
+        add: Add a window to the page
+        extend: Add a list of windows to the page
+        remove: Remove window from page
     """
 
     def __init__(self, windows: list):

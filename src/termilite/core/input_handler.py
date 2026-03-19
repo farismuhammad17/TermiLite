@@ -23,7 +23,7 @@ def _update_input_windows(): # For Windows systems
         _process_sequence(seq)
     else:
         key = '\n' if char == '\r' else char
-        termilite.globals.kbd_buffer.append(key)
+        _process_sequence(key)
 
 def _update_input_unix(): # For Linux/Mac systems
     dr, _, _ = select.select([sys.stdin], [], [], 0)
@@ -40,13 +40,17 @@ def _update_input_unix(): # For Linux/Mac systems
                 break
         _process_sequence(seq)
     else:
-        termilite.globals.kbd_buffer.append(char)
+        _process_sequence(char)
 
 def _process_sequence(seq):
-    if seq.startswith("\x1b[<"):
+    if seq.startswith("\x1b[<"): # Mouse codes
         termilite.handle_mouse(seq)
-    else:
-        termilite.globals.kbd_buffer.append(seq)
+        return
+
+    if seq in termilite.kbd_actions:
+        termilite.kbd_actions[seq]()
+
+    termilite.globals.kbd_buffer.append(seq)
 
 def update_input():
     if os.name == 'nt':

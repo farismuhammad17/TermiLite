@@ -8,6 +8,15 @@ As of now, it has no dependencies, and works in any system. There is proper Z-in
 
 # Syntax
 
+> [!NOTE]  
+> Use the built-in `help` function to get documentation on specific parts. This is just a list of valid classes. For list of colors: [`termilite.color`](src/termilite/color.py).
+
+```py
+Page(
+    windows: list[Window]
+)
+```
+
 ```py
 Window(
     x: int,
@@ -77,8 +86,6 @@ InputBox(
 )
 
 InputBox.value: str = ""
-InputBox.underline: str = "_"
-InputBox.cursor: str = "|"
 ```
 
 ```py
@@ -89,7 +96,17 @@ Button(
     text: str,
     width: int,
     height: int,
-    onclick: lambda: None
+    onclick: func
+)
+```
+
+```py
+Separator(
+    window: Window,
+    position: int,
+    horizontal: bool,
+    color: str,
+    char: str
 )
 ```
 
