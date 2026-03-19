@@ -31,6 +31,7 @@ class Button:
             wrap_lines = -(-len(text) // self.width)
             self._height = max(explicit_lines, wrap_lines)
 
+        self.label.color = color
         self.label.width = self._width
         self.label.height = self._height
 

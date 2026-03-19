@@ -1,5 +1,5 @@
-Separator widget
+Fixed logic error in Separator
 
-Added window.create_desktop
-Fixed stupid bugs
-Renamed input.py to inputbox.py for clarity
+- Rendering did not account for the parent window.
+- More colors!
+- InputBox can now go down with '\n'

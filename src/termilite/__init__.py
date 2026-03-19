@@ -17,7 +17,7 @@ from .ui.separator import Separator
 size = globals.screen_width, globals.screen_height
 
 __author__      = "Faris Muhammad"
-__version__     = "0.1.2"
+__version__     = "0.1.3"
 __license__     = "MIT"
 __description__ = "A very lightweight TUI engine"
 

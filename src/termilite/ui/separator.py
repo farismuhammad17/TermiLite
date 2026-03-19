@@ -49,9 +49,9 @@ class Separator:
     def update(self): pass
 
     def render_vertical(self):
-        for y in range(self.window.y, self.window.y + self.window.height):
+        for y in range(self.window.height):
             self.window.set_cell(self.position, y, self.char, self.color)
 
     def render_horizontal(self):
-        for x in range(self.window.x, self.window.x + self.window.width):
+        for x in range(self.window.width):
             self.window.set_cell(x, self.position, self.char, self.color)

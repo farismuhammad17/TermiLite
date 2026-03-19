@@ -98,7 +98,7 @@ class InputBox:
 
         if char in ("\x7f", "\x08"): # Backspace
             self.value = self.value[:-1]
-        elif len(char) == 1 and char.isprintable():
+        elif len(char) == 1 and char.isprintable() or char == '\n':
             self.value += char
 
     def render(self):
