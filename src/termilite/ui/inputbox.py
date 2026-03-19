@@ -12,8 +12,6 @@ class InputBox:
 
     Display:
         value (str): Text inputted
-        underline (str): Default underline for empty region
-        cursor (str): Default cursor for current mouse position
     """
 
     def __init__(self, window: termilite.Window, x: int, y: int, width: int = None, height: int = None, maxlen: int = 10):
@@ -27,9 +25,6 @@ class InputBox:
         self._width  = width or window.width
         self._height = height or window.height
         self._maxlen = maxlen
-
-        self._underline = '_' # Can be set to empty strings if unpreferred
-        self._cursor    = '|'
 
         window.components.append(self)
 
@@ -76,25 +71,18 @@ class InputBox:
         self.label.color = value
 
     @property
-    def underline(self):
-        return self._underline() if callable(self._underline) else self._underline
-    @underline.setter
-    def underline(self, value):
-        self._underline = value
-
-    @property
-    def cursor(self):
-        return self._cursor() if callable(self._cursor) else self._cursor
-    @cursor.setter
-    def cursor(self, value):
-        self._cursor = value
-
-    @property
     def maxlen(self):
         return self._maxlen() if callable(self._maxlen) else self._maxlen
     @maxlen.setter
     def maxlen(self, value):
         self._maxlen = value
+
+    @property
+    def placeholder(self):
+        return self._placeholder() if callable(self._placeholder) else self._placeholder
+    @placeholder.setter
+    def placeholder(self, value):
+        self._placeholder = value
 
     def update(self):
         """

@@ -6,12 +6,13 @@ from .core.input_handler import update_input, get_kbd_buffer_left
 from .core.mouse         import parse_mouse, handle_mouse
 from .core.engine        import run
 
-from .ui.page   import Page
-from .ui.window import Window
-from .ui.panel  import Panel
-from .ui.label  import Label
-from .ui.input  import InputBox
-from .ui.button import Button
+from .ui.page      import Page
+from .ui.window    import Window
+from .ui.panel     import Panel
+from .ui.label     import Label
+from .ui.inputbox  import InputBox
+from .ui.button    import Button
+from .ui.separator import Separator
 
 size = globals.screen_width, globals.screen_height
 

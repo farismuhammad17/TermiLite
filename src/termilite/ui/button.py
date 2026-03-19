@@ -12,22 +12,27 @@ class Button:
         onclick: Function to execute upon clicking.
     """
 
-    def __init__(self, window: termilite.Window, x: int, y: int, text: str, width: int = None, height: int = None, onclick = lambda: None):
+    def __init__(self, window: termilite.Window, x: int, y: int, text: str, width: int = None, height: int = None, color: str = termilite.color.RESET, onclick = lambda: None):
         self.window = window
         self._x = x
         self._y = y
+        self._color = color
+
         self.onclick = onclick
 
         self.label = termilite.Label(window, x, y, text)
         window.components.remove(self.label)
 
-        self._width  = width or (window.width - x)
+        self._width = width or len(text)
         if height:
             self._height = height
         else:
             explicit_lines = text.count('\n') + 1
             wrap_lines = -(-len(text) // self.width)
             self._height = max(explicit_lines, wrap_lines)
+
+        self.label.width = self._width
+        self.label.height = self._height
 
         window.components.append(self)
 
@@ -37,6 +42,7 @@ class Button:
     @x.setter
     def x(self, value):
         self._x = value
+        self.label.x = value
 
     @property
     def y(self):
@@ -44,6 +50,7 @@ class Button:
     @y.setter
     def y(self, value):
         self._y = value
+        self.label.y = value
 
     @property
     def text(self):
@@ -70,9 +77,10 @@ class Button:
 
     @property
     def color(self):
-        return self.label.color() if callable(self.label.color) else self.label.color
+        return self._color() if callable(self._color) else self._color
     @color.setter
     def color(self, value):
+        self._color = value
         self.label.color = value
 
     def update(self):
@@ -92,5 +100,9 @@ class Button:
 
         Renders the contents of the button.
         """
+
+        for i in range(self.x, self.x + self.width):
+            for j in range(self.y, self.y + self.height):
+                self.window.set_cell(i, j, ' ', self.color)
 
         self.label.render()

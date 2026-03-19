@@ -18,7 +18,7 @@ class Label:
         self._text = text
         self._color = color
 
-        self._width  = width or (window.width - x)
+        self._width = width or (window.width - x)
         if height:
             self._height = height
         else:
@@ -125,9 +125,12 @@ class Label:
 
             x += 1
             # Auto-wrap logic: only wrap if we exceed the window width
-            if x >= self.width:
+            if x >= self.x + self.width:
                 x = self.x
                 y += 1
+
+        if y - self.y > self.height:
+            self.height = y - self.y
 
     def set_text(self, text: str):
         """

@@ -36,13 +36,13 @@ class Window:
     """
 
     def __init__(self, x: int, y: int, z: int, width: int, height: int, name: str = "", color: str = termilite.color.BG_BLACK, margin_top: int = 0, margin_bottom: int = 0, margin_left: int = 0, margin_right: int = 0):
-        self.x = x
-        self.y = y
-        self.z = z + termilite.globals.MIN_WINDOW_Z
-        self.width  = width
-        self.height = height
-        self.name = name
-        self.color = color
+        self._x = x
+        self._y = y
+        self._z = z + termilite.globals.MIN_WINDOW_Z
+        self._width  = width
+        self._height = height
+        self._name = name
+        self._color = color
 
         self.margin_top = margin_top
         self.margin_bottom = margin_bottom
@@ -79,6 +79,55 @@ class Window:
 
         if termilite.globals.total_windows >= 10_000:
             raise TermiliteMaximumWindowsReached()
+
+    @property
+    def x(self):
+        return self._x() if callable(self._x) else self._x
+    @x.setter
+    def x(self, value):
+        self._x = value
+
+    @property
+    def y(self):
+        return self._y() if callable(self._y) else self._y
+    @y.setter
+    def y(self, value):
+        self._y = value
+
+    @property
+    def z(self):
+        return self._z() if callable(self._z) else self._z
+    @z.setter
+    def z(self, value):
+        self._z = value
+
+    @property
+    def width(self):
+        return self._width() if callable(self._width) else self._width
+    @width.setter
+    def width(self, value):
+        self._width = value
+
+    @property
+    def height(self):
+        return self._height() if callable(self._height) else self._height
+    @height.setter
+    def height(self, value):
+        self._height = value
+
+    @property
+    def name(self):
+        return self._name() if callable(self._name) else self._name
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @property
+    def color(self):
+        return self._color() if callable(self._color) else self._color
+    @color.setter
+    def color(self, value):
+        self._color = value
 
     def set_cell(self, x: int, y: int, char: str, color: str = termilite.color.RESET):
         """
@@ -150,3 +199,26 @@ class Window:
                 termilite.globals.focussed_obj = comp
                 return True
         return False
+
+    @staticmethod
+    def create_desktop():
+        """
+        Creates a window that takes up the entire screen
+        size, with the border styling going out of the
+        screen.
+        """
+
+        win = Window(
+            x=0, y=0, z=0,
+            width=termilite.globals.screen_width,
+            height=termilite.globals.screen_height
+        )
+
+        win.draggable = False
+
+        win.resizable_top    = False
+        win.resizable_bottom = False
+        win.resizable_left   = False
+        win.resizable_right  = False
+
+        return win

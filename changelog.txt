@@ -1,0 +1,5 @@
+Separator widget
+
+Added window.create_desktop
+Fixed stupid bugs
+Renamed input.py to inputbox.py for clarity
