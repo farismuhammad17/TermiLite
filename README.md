@@ -86,6 +86,9 @@ InputBox(
 )
 
 InputBox.value: str = ""
+InputBox.cursor_x: int = 0
+InputBox.cursor_y: int = 0
+InputBox.cursor_char: str = '|'
 ```
 
 ```py
@@ -107,6 +110,30 @@ Separator(
     horizontal: bool,
     color: str,
     char: str
+)
+```
+
+```py
+Notification(
+    title: str,
+    message: str,
+    width: int,
+    height: int,
+    duration: int
+)
+
+Notification.target_x: int = termilite.globals.screen_width - width
+Notification.duration: int = duration
+Notification.start_time: float = 0
+Notification.state: str = "IN" # IN, STAY, OUT
+Notification.speed: int = 1    # Characters per frame
+
+create_notification(
+    title: str,
+    message: str,
+    width: int,
+    height: int,
+    duration: int = 5
 )
 ```
 

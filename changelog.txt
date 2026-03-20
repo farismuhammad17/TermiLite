@@ -1,4 +1,5 @@
-Keyboard actions
+Added Notification
 
-- Added option directly execute a function upon keyboard input.
-- Fixed improper/outdated documentation
+- Notification widget to slide in
+- Cursor to input box
+- Fixed unbounded input box

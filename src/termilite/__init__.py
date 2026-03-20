@@ -6,20 +6,21 @@ from .core.input_handler import update_input, get_kbd_buffer_left
 from .core.mouse         import parse_mouse, handle_mouse
 from .core.engine        import run
 
-from .ui.page      import Page
-from .ui.window    import Window
-from .ui.panel     import Panel
-from .ui.label     import Label
-from .ui.inputbox  import InputBox
-from .ui.button    import Button
-from .ui.separator import Separator
+from .ui.page         import Page
+from .ui.window       import Window
+from .ui.panel        import Panel
+from .ui.label        import Label
+from .ui.inputbox     import InputBox
+from .ui.button       import Button
+from .ui.separator    import Separator
+from .ui.notification import Notification, create_notification
 
 size = globals.screen_width, globals.screen_height
 
 kbd_actions = {}
 
 __author__      = "Faris Muhammad"
-__version__     = "0.1.4"
+__version__     = "0.1.5"
 __license__     = "MIT"
 __description__ = "A very lightweight TUI engine"
 

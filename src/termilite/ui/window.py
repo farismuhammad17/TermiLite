@@ -142,7 +142,10 @@ class Window:
         pos_x = x + self.x
         pos_y = y + self.y
 
-        if 0 <= x < self.width and 0 <= y < self.height:
+        if (0 <= pos_x < termilite.globals.screen_width and
+            0 <= pos_y < termilite.globals.screen_height and
+            0 <= x < self.width and 0 <= y < self.height
+        ):
             termilite.globals.screen[pos_y][pos_x] = char
             termilite.globals.color_buffer[pos_y][pos_x] = color
 

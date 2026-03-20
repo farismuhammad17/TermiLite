@@ -73,6 +73,10 @@ class Label:
     def update(self): pass
 
     def render(self):
+        """
+        NOTE: Function is called by engine, not required to call.
+        """
+
         x = self.x
         y = self.y
         color = self.color

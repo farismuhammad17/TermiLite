@@ -12,6 +12,9 @@ class InputBox:
 
     Display:
         value (str): Text inputted
+        cursor_x (int): X position of cursor
+        cursor_y (int): Y position of cursor
+        cursor_char (str): Character used to display cursor
     """
 
     def __init__(self, window: termilite.Window, x: int, y: int, width: int = None, height: int = None, maxlen: int = 10):
@@ -25,6 +28,10 @@ class InputBox:
         self._width  = width or window.width
         self._height = height or window.height
         self._maxlen = maxlen
+
+        self._cursor_x = 0
+        self._cursor_y = 0
+        self._cursor_char = '|'
 
         window.components.append(self)
 
@@ -78,11 +85,25 @@ class InputBox:
         self._maxlen = value
 
     @property
-    def placeholder(self):
-        return self._placeholder() if callable(self._placeholder) else self._placeholder
-    @placeholder.setter
-    def placeholder(self, value):
-        self._placeholder = value
+    def cursor_x(self):
+        return self._cursor_x() if callable(self._cursor_x) else self._cursor_x
+    @cursor_x.setter
+    def cursor_x(self, value):
+        self._cursor_x = value
+
+    @property
+    def cursor_y(self):
+        return self._cursor_y() if callable(self._cursor_y) else self._cursor_y
+    @cursor_y.setter
+    def cursor_y(self, value):
+        self._cursor_y = value
+
+    @property
+    def cursor_char(self):
+        return self._cursor_char() if callable(self._cursor_char) else self._cursor_char
+    @cursor_char.setter
+    def cursor_char(self, value):
+        self._cursor_char = value
 
     def update(self):
         """
@@ -96,10 +117,19 @@ class InputBox:
 
         char = termilite.get_kbd_buffer_left()
 
-        if char in ("\x7f", "\x08"): # Backspace
+        if char in ('\x7f', '\x08'): # Backspace
             self.value = self.value[:-1]
-        elif len(char) == 1 and char.isprintable() or char == '\n':
-            self.value += char
+
+        elif (len(char) == 1 and char.isprintable()) or char == '\n':
+            lines = self.value.split('\n')
+            current_line_count = len(lines)
+
+            is_manual_wrap = char == '\n'
+            is_auto_wrap   = len(lines[-1]) >= self.width
+
+            if current_line_count + (1 if (is_manual_wrap or is_auto_wrap) else 0) <= self.height:
+                if len(self.value) < self.maxlen:
+                    self.value += char
 
     def render(self):
         """
@@ -109,3 +139,23 @@ class InputBox:
         """
 
         self.label.render()
+
+        if termilite.globals.focussed_obj != self:
+            return
+
+        curr_x, curr_y = 0, 0
+        for char in self.value:
+            if char == '\n':
+                curr_x = 0
+                curr_y += 1
+            else:
+                curr_x += 1
+                if curr_x >= self.width:
+                    curr_x = 0
+                    curr_y += 1
+
+        if curr_y < self.height:
+            self.cursor_x = curr_x
+            self.cursor_y = curr_y
+
+            self.window.set_cell(self.x + curr_x, self.y + curr_y, self.cursor_char, self.color)
